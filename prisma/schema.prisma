@@ -1,0 +1,88 @@
+// Prato Limpo · schema
+// SQLite no desenvolvimento. Para Postgres: troque provider para "postgresql"
+// e DATABASE_URL para uma URL postgresql://. Os campos "enum" são String para
+// funcionar igual nos dois bancos; os valores válidos estão nos comentários e em lib/tipos.ts.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Analise {
+  id                String   @id @default(cuid())
+  bandeja           String
+  /// ALMOCO | JANTAR
+  refeicao          String
+  criadaEm          DateTime @default(now())
+  fotoIdealUrl      String?
+  fotoFinalUrl      String?
+  /// largura/altura (px) das fotos, usadas para desenhar as caixas
+  idealW            Int?
+  idealH            Int?
+  finalW            Int?
+  finalH            Int?
+  /// fração 0..1, média das classes ponderada pela área no prato ideal
+  taxaPrato         Float?
+  gramasDesperdicio Float?
+  /// PENDENTE | CONCLUIDA | ERRO
+  status            String   @default("PENDENTE")
+  mensagemErro      String?
+  /// REAL (app/fotos) | EXEMPLO (seed) | DEMO (imagem de exemplo, fora do painel)
+  origem            String   @default("REAL")
+  modelo            String?
+
+  deteccoes  Deteccao[]
+  resultados ResultadoClasse[]
+
+  @@index([criadaEm])
+  @@index([status, origem, criadaEm])
+}
+
+model Deteccao {
+  id        String  @id @default(cuid())
+  analiseId String
+  analise   Analise @relation(fields: [analiseId], references: [id], onDelete: Cascade)
+  /// IDEAL | FINAL
+  foto      String
+  classe    String
+  confianca Float
+  /// centro e tamanho normalizados de 0 a 1
+  x         Float
+  y         Float
+  w         Float
+  h         Float
+
+  @@index([analiseId])
+}
+
+model ResultadoClasse {
+  id        String  @id @default(cuid())
+  analiseId String
+  analise   Analise @relation(fields: [analiseId], references: [id], onDelete: Cascade)
+  classe    String
+  areaIdeal Float
+  areaFinal Float
+  /// fração 0..1
+  taxa      Float
+  gramas    Float
+
+  @@unique([analiseId, classe])
+  @@index([classe])
+}
+
+model ConfigClasse {
+  classe        String @id
+  porcaoPadraoG Float
+}
+
+model Meta {
+  id             Int       @id @default(1)
+  /// fração 0..1 (padrão 15%)
+  taxaMeta       Float     @default(0.15)
+  /// segunda-feira da semana 1 do semestre
+  inicioSemestre DateTime?
+}
