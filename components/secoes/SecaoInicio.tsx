@@ -41,7 +41,7 @@ const PASSOS = [
   {
     titulo: "Medir",
     texto:
-      "A sobra dividida pela área servida dá a taxa de cada alimento, que vira gramas pela porção padrão. Os gráficos acompanham isso por dia, semana e semestre.",
+      "A sobra dividida pela área servida dá a taxa de desperdício de cada alimento. Os gráficos acompanham isso por dia, semana e semestre.",
   },
 ];
 
@@ -111,39 +111,6 @@ export function SecaoInicio() {
               </li>
             ))}
           </ol>
-        </div>
-
-        <div id="modelo" className="modelo">
-          <div>
-            <h2 className="secao-subtitulo">O modelo</h2>
-            <p className="muted">
-              Detecção de objetos treinada no Roboflow com fotos de bandejas do RU: projeto{" "}
-              <span className="num">desperdicio_ru-fwub5</span>, versão 35, com 1.405 imagens anotadas e licença CC BY
-              4.0.
-            </p>
-            <p className="caption" style={{ marginTop: 8 }}>
-              Caixas delimitadoras só aproximam a área do alimento. Um modelo de segmentação mediria melhor, e o sistema
-              já está pronto para essa troca.
-            </p>
-          </div>
-          <dl className="modelo-metricas">
-            <div>
-              <dt>Arquitetura</dt>
-              <dd className="num">YOLOv11n</dd>
-            </div>
-            <div>
-              <dt>mAP@50</dt>
-              <dd className="num">72,9%</dd>
-            </div>
-            <div>
-              <dt>Precisão</dt>
-              <dd className="num">81,8%</dd>
-            </div>
-            <div>
-              <dt>Revocação</dt>
-              <dd className="num">68,7%</dd>
-            </div>
-          </dl>
         </div>
       </div>
     </section>

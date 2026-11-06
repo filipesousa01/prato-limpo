@@ -1,11 +1,11 @@
 import type { Classe } from "@/lib/classes";
-import { fmtKg, fmtPct } from "@/lib/format";
+import { fmtPct } from "@/lib/format";
 
 export type LinhaShare = { classe: Classe; rotulo: string; gramas: number; participacao: number };
 
-/** Participação de cada classe no total desperdiçado (kg), com barra fina. */
+/** Participação de cada classe no total desperdiçado, com barra fina. */
 export function ShareList({ linhas, destaque }: { linhas: LinhaShare[]; destaque: Classe | null }) {
-  const ordenadas = [...linhas].sort((a, b) => b.gramas - a.gramas);
+  const ordenadas = [...linhas].sort((a, b) => b.participacao - a.participacao);
   const max = Math.max(...ordenadas.map((l) => l.participacao), 0.0001);
   return (
     <ul className="share" aria-label="Participação de cada classe no total desperdiçado">
@@ -22,7 +22,6 @@ export function ShareList({ linhas, destaque }: { linhas: LinhaShare[]; destaque
             </div>
           </div>
           <span className="share-pct">{fmtPct(l.participacao)}</span>
-          <span className="share-kg">{fmtKg(l.gramas)}</span>
         </li>
       ))}
     </ul>

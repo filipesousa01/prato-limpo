@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Página única com rolagem suave:
- *   01 #inicio  · o projeto (hero, como funciona, o modelo)
+ *   01 #inicio  · o projeto (hero, como funciona)
  *   02 #analise · nova análise, com o resultado logo abaixo
  *   03 #painel  · gráficos
  */

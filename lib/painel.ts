@@ -338,7 +338,7 @@ export function fraseParticipacao(linhas: LinhaClasse[], classeTop?: Classe): st
     (b.taxa ?? 0) < (topLinha.taxa ?? 0)
   ) {
     const fem = ARTIGO[a.classe] === "a" && ARTIGO[b.classe] === "a";
-    return `${nomes} somam ${soma}% da massa desperdiçada, mesmo com taxas menores que a d${ARTIGO[topLinha.classe]} ${topLinha.rotulo.toLowerCase()}: são ${fem ? "servidas" : "servidos"} em maior quantidade.`;
+    return `${nomes} somam ${soma}% do desperdício total, mesmo com taxas menores que a d${ARTIGO[topLinha.classe]} ${topLinha.rotulo.toLowerCase()}: são ${fem ? "servidas" : "servidos"} em maior quantidade.`;
   }
-  return `${nomes} somam ${soma}% da massa desperdiçada no período.`;
+  return `${nomes} somam ${soma}% do desperdício no período.`;
 }

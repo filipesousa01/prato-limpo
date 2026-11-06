@@ -42,7 +42,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <span>Prato Limpo, um projeto do VisionLab na Universidade Federal do Maranhão.</span>
             <span className="footer-links">
               <Link href="/#como-funciona">Como funciona</Link>
-              <Link href="/#modelo">O modelo</Link>
               <span>Dataset sob licença CC BY 4.0</span>
             </span>
           </div>

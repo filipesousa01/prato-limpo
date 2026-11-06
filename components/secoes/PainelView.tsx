@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { EmptyState, MetricTile } from "@/components/ui/misc";
 import { CLASSES_POR_ROTULO, type Classe, ROTULOS } from "@/lib/classes";
-import { fmtInt, fmtKg, fmtNum, fmtPct, fmtPctNum, fmtPP } from "@/lib/format";
+import { fmtInt, fmtNum, fmtPct, fmtPctNum, fmtPP } from "@/lib/format";
 import type { DadosPainel } from "@/lib/painel";
 
 type Ordem = "taxa" | "pratos" | "az";
@@ -120,12 +120,6 @@ export function PainelView({ dados: d }: { dados: DadosPainel }) {
           }
         />
         <MetricTile
-          label="Comida desperdiçada (estimada)"
-          value={fmtNum(k.gramas / 1000, 0)}
-          unit="kg"
-          foot={<>≈ {fmtInt(k.gramas / 450)} refeições de 450 g</>}
-        />
-        <MetricTile
           label="Classe com maior taxa"
           value={k.classeTop?.rotulo ?? "—"}
           valueClassName="metric-serif"
@@ -186,7 +180,7 @@ export function PainelView({ dados: d }: { dados: DadosPainel }) {
 
         <Card
           title="Participação no total desperdiçado"
-          subtitle={`${fmtKg(k.gramas, 0)} no período, por classe`}
+          subtitle="Distribuição no período, por classe"
         >
           <ShareList linhas={d.porClasse} destaque={destaque} />
           {d.frase && <p className="share-note">{d.frase}</p>}
@@ -243,33 +237,6 @@ export function PainelView({ dados: d }: { dados: DadosPainel }) {
           <Heatmap linhas={heat} destaque={destaque} />
         </Card>
       </div>
-
-      {/* ---------- metodologia ---------- */}
-      <Card className="metodo">
-        <div className="metodo-texto">
-          <h2 className="card-title">Como a taxa é medida</h2>
-          <p>
-            Cada bandeja é fotografada antes e depois da refeição. O modelo detecta as 12 classes nas duas fotos. A taxa
-            de uma classe é a sobra efetiva (área × confiança do modelo) dividida pela área servida: o que ele reconhece
-            com pouca confiança, como osso ou casca, quase não conta.
-          </p>
-          <p className="caption">
-            A detecção usa caixas delimitadoras, então a área é aproximada. Segmentação deixaria a medida mais precisa.
-          </p>
-        </div>
-        <div className="metodo-pills">
-          <div className="pills">
-            <span className="pill num">YOLOv11n, versão 35</span>
-            <span className="pill num">mAP@50 72,9%</span>
-            <span className="pill num">Precisão 81,8%</span>
-            <span className="pill num">Revocação 68,7%</span>
-            <span className="pill num">1.405 imagens anotadas</span>
-          </div>
-          <a href="#modelo" className="btn btn-md btn-secondary">
-            <span>Ver detalhes do modelo</span>
-          </a>
-        </div>
-      </Card>
     </div>
   );
 }
