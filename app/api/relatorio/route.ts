@@ -27,12 +27,10 @@ export async function GET(req: Request) {
   linhas.push(["Pratos analisados", String(d.kpis.pratos)]);
   linhas.push(["Taxa média de desperdício (%)", pct(d.kpis.taxaMedia)]);
   linhas.push(["Meta (%)", pct(d.meta)]);
-  linhas.push(["Comida desperdiçada estimada (kg)", fmtNum(d.kpis.gramas / 1000, 1)]);
-  linhas.push(["Equivalente em refeições de 450 g", String(Math.round(d.kpis.gramas / 450))]);
   linhas.push([]);
-  linhas.push(["Classe", "Taxa (%)", "Pratos", "Desperdício (kg)", "Participação (%)"]);
+  linhas.push(["Classe", "Taxa (%)", "Pratos", "Participação (%)"]);
   for (const l of [...d.porClasse].sort((a, b) => (b.taxa ?? -1) - (a.taxa ?? -1))) {
-    linhas.push([l.rotulo, pct(l.taxa), String(l.pratos), fmtNum(l.gramas / 1000, 2), pct(l.participacao)]);
+    linhas.push([l.rotulo, pct(l.taxa), String(l.pratos), pct(l.participacao)]);
   }
   linhas.push([]);
   linhas.push(["Taxa por dia da semana (%)", ...DIAS_UTEIS]);

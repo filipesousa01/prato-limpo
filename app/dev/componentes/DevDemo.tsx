@@ -122,7 +122,6 @@ export function DevDemo() {
       <div className="dev-grid">
         <MetricTile label="Pratos analisados" value="1.284" foot={<span className="delta delta-good">▲ 8,1% vs. semana anterior</span>} />
         <MetricTile label="Taxa média de desperdício" value="16,8" unit="%" />
-        <MetricTile label="Comida desperdiçada (estimada)" value="134" unit="kg" />
         <MetricTile label="Classe com maior taxa" value="Salada" valueClassName="metric-serif" />
       </div>
 

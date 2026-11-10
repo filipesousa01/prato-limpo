@@ -41,49 +41,69 @@ const PASSOS = [
   {
     titulo: "Medir",
     texto:
-      "A sobra dividida pela área servida dá a taxa de cada alimento, que vira gramas pela porção padrão. Os gráficos acompanham isso por dia, semana e semestre.",
+      "A sobra dividida pela área servida dá a taxa de desperdício de cada alimento. Os gráficos acompanham isso por dia, semana e semestre.",
   },
 ];
 
 export function SecaoInicio() {
   return (
     <section id="inicio" className="secao secao-inicio" aria-labelledby="inicio-titulo">
-      <div className="container hero">
-        <div className="hero-texto">
-          <h1 id="inicio-titulo" className="hero-titulo">
-            Prato Limpo
-          </h1>
-          <p className="hero-frase">Desperdício alimentar medido por visão computacional</p>
-          <p className="hero-lead">
-            Uma pesquisa de Iniciação Científica do VisionLab que mede quanto da comida servida no Restaurante
-            Universitário da UFMA volta no prato. Com isso, o RU pode ajustar porções e cardápio a partir de dados, não de
-            impressões.
-          </p>
-          <div className="hero-acoes">
-            <a href="#analise" className="btn btn-lg btn-primary">
-              <IconScan />
-              <span>Analisar um prato</span>
-            </a>
-            <a href="#painel" className="btn btn-lg btn-secondary">
-              <IconChart />
-              <span>Ver os gráficos</span>
-            </a>
+      <div className="container">
+        <div className="hero">
+          <div className="hero-texto">
+            <p className="hero-eyebrow">Iniciação Científica · VisionLab UFMA</p>
+            <h1 id="inicio-titulo" className="hero-titulo">
+              Prato <span className="hero-titulo-destaque">Limpo</span>
+            </h1>
+            <p className="hero-frase">Desperdício alimentar medido por visão computacional</p>
+            <p className="hero-lead">
+              Uma pesquisa de Iniciação Científica do VisionLab que mede quanto da comida servida no Restaurante
+              Universitário da UFMA volta no prato. Com isso, o RU pode ajustar porções e cardápio a partir de dados, não
+              de impressões.
+            </p>
+            <div className="hero-acoes">
+              <a href="#analise" className="btn btn-lg btn-primary">
+                <IconScan />
+                <span>Analisar um prato</span>
+              </a>
+              <a href="#painel" className="btn btn-lg btn-ghost-dark">
+                <IconChart />
+                <span>Ver os gráficos</span>
+              </a>
+            </div>
+            <ul className="hero-checks">
+              <li>12 alimentos do cardápio</li>
+              <li>Modelo YOLOv11n</li>
+              <li>Taxa por refeição</li>
+            </ul>
           </div>
-        </div>
 
-        <figure className="hero-demo">
-          <BeforeAfterSlider
-            idealUrl={EXEMPLO_IDEAL_URL}
-            finalUrl={EXEMPLO_FINAL_URL}
-            proporcao={EXEMPLO_W / EXEMPLO_H}
-            caixas={caixasHero}
-            mostrarCaixas
-          />
-          <figcaption className="caption">
-            Arraste o divisor para comparar o prato servido com o devolvido. A caixa tracejada é um osso: o modelo o
-            reconhece com pouca confiança, e ele quase não conta como sobra.
-          </figcaption>
-        </figure>
+          <figure className="hero-demo">
+            <div className="hero-demo-moldura">
+              <BeforeAfterSlider
+                idealUrl={EXEMPLO_IDEAL_URL}
+                finalUrl={EXEMPLO_FINAL_URL}
+                proporcao={EXEMPLO_W / EXEMPLO_H}
+                caixas={caixasHero}
+                mostrarCaixas
+              />
+              <div className="hero-chip hero-chip-topo" aria-hidden="true">
+                <span className="hero-chip-rotulo">Alimentos reconhecidos</span>
+                <span className="hero-chip-valor">12</span>
+                <span className="hero-chip-sub">YOLOv11n</span>
+              </div>
+              <div className="hero-chip hero-chip-base" aria-hidden="true">
+                <span className="hero-chip-rotulo">Fotos por bandeja</span>
+                <span className="hero-chip-valor">2</span>
+                <span className="hero-chip-sub hero-chip-ok">Servida e devolvida</span>
+              </div>
+            </div>
+            <figcaption className="caption">
+              Arraste o divisor para comparar o prato servido com o devolvido. A caixa tracejada são migalhas e molho da
+              carne: o modelo as reconhece com pouca confiança, e elas quase não contam como sobra.
+            </figcaption>
+          </figure>
+        </div>
       </div>
 
       <div className="container">
@@ -111,39 +131,6 @@ export function SecaoInicio() {
               </li>
             ))}
           </ol>
-        </div>
-
-        <div id="modelo" className="modelo">
-          <div>
-            <h2 className="secao-subtitulo">O modelo</h2>
-            <p className="muted">
-              Detecção de objetos treinada no Roboflow com fotos de bandejas do RU: projeto{" "}
-              <span className="num">desperdicio_ru-fwub5</span>, versão 35, com 1.405 imagens anotadas e licença CC BY
-              4.0.
-            </p>
-            <p className="caption" style={{ marginTop: 8 }}>
-              Caixas delimitadoras só aproximam a área do alimento. Um modelo de segmentação mediria melhor, e o sistema
-              já está pronto para essa troca.
-            </p>
-          </div>
-          <dl className="modelo-metricas">
-            <div>
-              <dt>Arquitetura</dt>
-              <dd className="num">YOLOv11n</dd>
-            </div>
-            <div>
-              <dt>mAP@50</dt>
-              <dd className="num">72,9%</dd>
-            </div>
-            <div>
-              <dt>Precisão</dt>
-              <dd className="num">81,8%</dd>
-            </div>
-            <div>
-              <dt>Revocação</dt>
-              <dd className="num">68,7%</dd>
-            </div>
-          </dl>
         </div>
       </div>
     </section>

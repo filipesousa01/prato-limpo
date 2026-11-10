@@ -1,6 +1,9 @@
 /**
  * Gera as ilustrações de exemplo (prato ideal e prato final) a partir das caixas de lib/exemplo.ts.
  *   npx tsx scripts/gerar-exemplos.ts
+ *
+ * ATENÇÃO: hoje /public/exemplos tem FOTOS REAIS de bandejas. Rodar este script as
+ * substitui por ilustrações desenhadas.
  */
 import { mkdir } from "node:fs/promises";
 import path from "node:path";

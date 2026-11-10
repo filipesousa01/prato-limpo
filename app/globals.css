@@ -1,43 +1,62 @@
 /* =========================================================
    Prato Limpo: tokens e base
-   Sempre no tema claro. Papel branco, texto grafite, linhas finas.
-   Azul só para ação principal, "consumido" e foco. Âmbar = desperdiçado.
+   Estilo "SaaS dashboard": fundo cinza-azulado, cards brancos com sombra
+   suave, hero em degradê verde-floresta, ação principal em verde-limão.
+   Esmeralda = consumido e foco. Laranja = desperdiçado.
    ========================================================= */
 
 :root {
   /* papel */
-  --bg: #ffffff;
+  --bg: #f4f7f9;
   --bg-top: #ffffff;
   --surface: #ffffff;
-  --surface-sunken: #f4f5f6;
-  --surface-hover: rgba(21, 24, 29, 0.03);
+  --surface-sunken: #eef3f2;
+  --surface-hover: rgba(1, 77, 58, 0.04);
   /* linha */
-  --line: #e6e7e9;
-  --line-strong: #858b94;
-  /* grafite e cinza */
-  --ink: #15181d;
-  --ink-muted: #5e6570;
-  /* azul VisionLab: só ação principal, consumido e foco */
-  --brand: #2f6fd0;
-  --brand-strong: #1e5bb8;
-  --brand-soft: #eaf1fb;
-  /* âmbar: desperdício */
-  --waste: #9e4d06;
-  --waste-light: #e3ae73;
-  --waste-soft: #fbf1e5;
-  --waste-ink: #7a3a04;
-  --danger: #b3261e;
-  --danger-soft: #fbe9e7;
-  --ok: #1e6b3a;
-  --ok-soft: #e4f3e9;
-  --focus: #1d5fd0;
-  --scrim: rgba(21, 24, 29, 0.55);
-  --card-shadow: none;
-  --track: #eff0f2;
+  --line: #e2e9ec;
+  --line-strong: #84918c;
+  /* tinta: quase preto com um fundo verde */
+  --ink: #0f1f1a;
+  --ink-muted: #5a6964;
+  /* esmeralda: consumido, foco, textos de marca */
+  --brand: #0e7a5a;
+  --brand-strong: #0a5c44;
+  --brand-soft: #e6f7ee;
+  /* floresta: hero, logo, superfícies escuras */
+  --forest: #014d3a;
+  --forest-deep: #0b3a2d;
+  --forest-ink: #062a20;
+  --forest-line: rgba(255, 255, 255, 0.14);
+  --hero-gradient:
+    radial-gradient(120% 90% at 0% 0%, #1e6450 0%, rgba(30, 100, 80, 0) 55%),
+    radial-gradient(80% 70% at 100% 100%, #0a3127 0%, rgba(10, 49, 39, 0) 60%),
+    linear-gradient(135deg, #12503f 0%, #014d3a 45%, #0b3a2d 100%);
+  /* verde suave: só a ação principal */
+  --lime: #a3d97c;
+  --lime-strong: #93cd6a;
+  --lime-ink: #0b2e1c;
+  --lime-text-gradient: linear-gradient(95deg, #ffffff 0%, #ffffff 48%, #d6eec4 72%, #a3d97c 100%);
+  /* laranja: desperdício */
+  --waste: #b45309;
+  --waste-light: #f5a524;
+  --waste-soft: #fef3e2;
+  --waste-ink: #7c3a06;
+  /* acentos dos gráficos (teal e amarelo da referência) */
+  --teal: #14b8a6;
+  --citrus: #d4e157;
+  --danger: #c0262d;
+  --danger-soft: #fdecec;
+  --ok: #0e7a5a;
+  --ok-soft: #e6f7ee;
+  --focus: #0e7a5a;
+  --scrim: rgba(6, 42, 32, 0.6);
+  --card-shadow: 0 1px 2px rgba(15, 31, 26, 0.04), 0 12px 32px -20px rgba(15, 31, 26, 0.18);
+  --float-shadow: 0 2px 4px rgba(15, 31, 26, 0.06), 0 24px 48px -20px rgba(6, 42, 32, 0.45);
+  --track: #edf2f1;
 
-  /* heatmap: âmbar claro → âmbar escuro */
-  --heat-0: #fbeedd;
-  --heat-1: #8a4205;
+  /* heatmap: laranja claro → laranja queimado */
+  --heat-0: #fef1dc;
+  --heat-1: #9a4406;
 
   /* espaço (grade de 4 px) */
   --s1: 4px;
@@ -52,7 +71,7 @@
   /* raios */
   --r-badge: 8px;
   --r-field: 12px;
-  --r-card: 16px;
+  --r-card: 18px;
   --r-pill: 999px;
 
   --header-h: 72px;
@@ -91,6 +110,8 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 15px;
   line-height: 22px;
+  letter-spacing: -0.006em;
+  font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -131,7 +152,8 @@ p {
 }
 
 ::selection {
-  background: var(--brand-soft);
+  background: var(--lime);
+  color: var(--lime-ink);
 }
 
 .sr-only {
@@ -164,25 +186,26 @@ p {
 /* ---------- tipografia ---------- */
 
 .display {
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
   font-size: 56px;
   line-height: 60px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.035em;
 }
 
 .page-title {
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
-  font-size: 38px;
-  line-height: 44px;
-  letter-spacing: -0.005em;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: -0.03em;
 }
 
 .card-title {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 22px;
   font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .caption {
@@ -201,17 +224,17 @@ p {
 
 .mono,
 .num {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-variant-numeric: tabular-nums;
 }
 
 .metric {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-variant-numeric: tabular-nums;
-  font-weight: 500;
-  font-size: 38px;
-  line-height: 44px;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: -0.035em;
 }
 
 .muted {

@@ -17,7 +17,7 @@ export const contraste = (a: string, b: string) => {
 const mix = (a: RGB, b: RGB, t: number): RGB => a.map((v, i) => v + (b[i] - v) * t) as RGB;
 
 const TEMAS = {
-  claro: { de: "#FBEEDD", ate: "#8A4205", textoClaro: "#FFFFFF", textoEscuro: "#0D0400" },
+  claro: { de: "#FEF1DC", ate: "#9A4406", textoClaro: "#FFFFFF", textoEscuro: "#0D0400" },
   escuro: { de: "#3A2A1A", ate: "#F5A03A", textoClaro: "#FFFFFF", textoEscuro: "#0D0400" },
 };
 

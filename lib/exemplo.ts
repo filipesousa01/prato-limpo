@@ -1,7 +1,10 @@
 /**
- * Par de imagens de exemplo (ilustrações em /public/exemplos) e as detecções
- * correspondentes. Servem para testar o fluxo sem fotos e sem chave da Roboflow.
- * Análises de exemplo ficam com origem "DEMO" e NÃO entram no painel.
+ * Par de fotos de exemplo (bandejas reais do RU em /public/exemplos) e as detecções
+ * correspondentes, marcadas à mão sobre as fotos. Servem para testar o fluxo sem
+ * chave da Roboflow. Análises de exemplo ficam com origem "DEMO" e NÃO entram no painel.
+ *
+ * As fotos foram recortadas, giradas 90° (anti-horário, bandeja de frente) e reduzidas para 1200x900; a do prato final
+ * foi alinhada à do prato servido para que os compartimentos coincidam no comparador.
  */
 import type { PredicaoBruta } from "./desperdicio";
 
@@ -20,22 +23,21 @@ const p = (cls: string, x: number, y: number, width: number, height: number, con
 });
 
 export const EXEMPLO_IDEAL: PredicaoBruta[] = [
-  p("arroz", 470, 330, 300, 220, 0.93),
-  p("feijao", 745, 320, 240, 190, 0.91),
-  p("salada", 430, 595, 260, 200, 0.88),
-  p("frango_derivados", 720, 595, 220, 160, 0.86),
-  p("abobora", 890, 470, 120, 110, 0.81),
-  p("farofa", 295, 460, 110, 100, 0.77),
+  p("arroz", 810, 670, 360, 440, 0.93),
+  p("feijao", 550, 675, 320, 430, 0.91),
+  p("farofa", 170, 717, 246, 360, 0.88),
+  p("carne_bovina", 1023, 190, 350, 286, 0.86),
 ];
 
 export const EXEMPLO_FINAL: PredicaoBruta[] = [
-  p("arroz", 455, 345, 150, 96, 0.84),
-  p("feijao", 760, 330, 84, 62, 0.72),
-  p("salada", 425, 600, 190, 140, 0.87),
-  p("abobora", 885, 475, 92, 82, 0.8),
-  // osso do frango: o modelo ainda vê "frango", mas com pouca confiança → quase não conta como sobra
-  p("frango_derivados", 820, 567, 130, 70, 0.42),
+  p("arroz", 533, 838, 240, 124, 0.71),
+  p("arroz", 955, 850, 96, 76, 0.64),
+  p("feijao", 787, 667, 44, 44, 0.66),
+  // pedaços no molho, no compartimento que estava vazio no prato servido
+  p("batata", 267, 243, 267, 287, 0.68),
+  // migalhas e molho da carne: o modelo ainda vê "carne", mas com pouca confiança → quase não conta como sobra
+  p("carne_bovina", 1033, 207, 300, 240, 0.36),
 ];
 
-/** Detecções que não devem ser desenhadas como comida na ilustração (o osso já está no desenho). */
-export const EXEMPLO_FINAL_SEM_DESENHO = new Set(["frango_derivados"]);
+/** Usado só pelo gerador de ilustrações antigo (scripts/gerar-exemplos.ts). */
+export const EXEMPLO_FINAL_SEM_DESENHO = new Set<string>();

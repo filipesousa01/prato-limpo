@@ -50,8 +50,8 @@ export function TrendLine({
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={desc}>
         <defs>
           <linearGradient id="trend-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" style={{ stopColor: "var(--waste)", stopOpacity: 0.08 }} />
-            <stop offset="1" style={{ stopColor: "var(--waste)", stopOpacity: 0.08 }} />
+            <stop offset="0" style={{ stopColor: "var(--waste-light)", stopOpacity: 0.32 }} />
+            <stop offset="1" style={{ stopColor: "var(--waste-light)", stopOpacity: 0 }} />
           </linearGradient>
         </defs>
         {ticks.map((t) => (
