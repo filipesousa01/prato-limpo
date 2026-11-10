@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import "./globals.css";
@@ -7,9 +7,8 @@ import "./components.css";
 import "./charts.css";
 import "./pages.css";
 
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "swap" });
-const sans = Instrument_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+/** Uma família só, geométrica, como no painel de referência: títulos em 600 com tracking apertado. */
+const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: "Prato Limpo · RU UFMA", template: "%s · Prato Limpo" },
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
 
 /** O site é sempre claro, mesmo com o sistema no modo escuro. */
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
+  themeColor: "#F4F7F9",
   colorScheme: "light",
 };
 
@@ -28,7 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="pt-BR"
-      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      className={sans.variable}
       data-scroll-behavior="smooth"
     >
       <body>

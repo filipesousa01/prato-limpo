@@ -20,7 +20,7 @@ function ExportButton() {
   q.set("periodo", sp.get("periodo") ?? "semana");
   q.set("refeicao", sp.get("refeicao") ?? "todas");
   return (
-    <Button href={`/api/relatorio?${q.toString()}`} download size="md" icon={<IconDownload />}>
+    <Button href={`/api/relatorio?${q.toString()}`} download size="md" variant="primary" icon={<IconDownload />}>
       <span className="hide-sm">Exportar relatório</span>
       <span className="show-sm">CSV</span>
     </Button>
