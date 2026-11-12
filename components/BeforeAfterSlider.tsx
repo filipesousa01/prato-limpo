@@ -75,7 +75,8 @@ export function BeforeAfterSlider({ idealUrl, finalUrl, proporcao, caixas, mostr
     <div
       ref={ref}
       className="ba"
-      style={{ aspectRatio: String(proporcao) }}
+      // fotos verticais não ficam mais altas que a tela; a proporção da foto é mantida
+      style={{ aspectRatio: String(proporcao), maxWidth: `min(100%, ${(80 * proporcao).toFixed(2)}svh)`, marginInline: "auto" }}
       onPointerDown={(e) => {
         if (e.button !== 0) return;
         arrastando.current = true;

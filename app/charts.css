@@ -75,11 +75,13 @@
 .ba-layer {
   position: absolute;
   inset: 0;
+  background: var(--surface-sunken);
 }
 .ba-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* a foto inteira aparece, sem cortar */
+  object-fit: contain;
   pointer-events: none;
 }
 .ba-divider {
