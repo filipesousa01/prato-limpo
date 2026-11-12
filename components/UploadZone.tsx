@@ -21,6 +21,8 @@ export function UploadZone({ titulo, descricao, previewUrl, erro, verificando, d
   const inputRef = useRef<HTMLInputElement>(null);
   const [arrastando, setArrastando] = useState(false);
   const profundidade = useRef(0);
+  /** largura / altura da foto escolhida: a caixa se adapta a ela, sem cortar */
+  const [proporcao, setProporcao] = useState<number | null>(null);
 
   const escolher = (files: FileList | null) => {
     const f = files?.[0];
@@ -39,6 +41,7 @@ export function UploadZone({ titulo, descricao, previewUrl, erro, verificando, d
 
       <div
         className={`upload-zone upload-${estado}`}
+        style={previewUrl && proporcao ? { aspectRatio: String(proporcao) } : undefined}
         onDragEnter={(e) => {
           e.preventDefault();
           profundidade.current++;
@@ -74,7 +77,12 @@ export function UploadZone({ titulo, descricao, previewUrl, erro, verificando, d
         {previewUrl ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element -- prévia local (blob:) */}
-            <img src={previewUrl} alt={`Prévia: ${titulo.toLowerCase()}`} className="upload-img" />
+            <img src={previewUrl} alt={`Prévia: ${titulo.toLowerCase()}`} className="upload-img"
+              onLoad={(e) => {
+                const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+                if (w && h) setProporcao(w / h);
+              }}
+            />
             {verificando && (
               <div className="upload-overlay">
                 <Spinner /> Verificando foto…

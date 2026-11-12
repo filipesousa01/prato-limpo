@@ -1,7 +1,6 @@
 import { BeforeAfterSlider, type Caixa } from "@/components/BeforeAfterSlider";
 import { IconChart, IconScan } from "@/components/icons";
-import { ClassPill } from "@/components/ui/misc";
-import { CLASSES_POR_ROTULO, ROTULOS, rotulo } from "@/lib/classes";
+import { rotulo } from "@/lib/classes";
 import {
   EXEMPLO_FINAL,
   EXEMPLO_FINAL_URL,
@@ -87,16 +86,6 @@ export function SecaoInicio() {
                 caixas={caixasHero}
                 mostrarCaixas
               />
-              <div className="hero-chip hero-chip-topo" aria-hidden="true">
-                <span className="hero-chip-rotulo">Alimentos reconhecidos</span>
-                <span className="hero-chip-valor">12</span>
-                <span className="hero-chip-sub">YOLOv11n</span>
-              </div>
-              <div className="hero-chip hero-chip-base" aria-hidden="true">
-                <span className="hero-chip-rotulo">Fotos por bandeja</span>
-                <span className="hero-chip-valor">2</span>
-                <span className="hero-chip-sub hero-chip-ok">Servida e devolvida</span>
-              </div>
             </div>
             <figcaption className="caption">
               Arraste o divisor para comparar o prato servido com o devolvido. A caixa tracejada são migalhas e molho da
@@ -107,17 +96,6 @@ export function SecaoInicio() {
       </div>
 
       <div className="container">
-        <ul className="hero-classes" aria-label="Os 12 alimentos que o modelo reconhece">
-          <li className="hero-classes-rotulo" aria-hidden="true">
-            O modelo reconhece
-          </li>
-          {CLASSES_POR_ROTULO.map((c) => (
-            <li key={c}>
-              <ClassPill>{ROTULOS[c]}</ClassPill>
-            </li>
-          ))}
-        </ul>
-
         <div id="como-funciona" className="como">
           <h2 className="secao-subtitulo">Como funciona</h2>
           <ol className="passos">
